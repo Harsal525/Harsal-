@@ -152,14 +152,6 @@ async def plan(client, message):
     await message.reply_photo(photo="https://telegra.ph/file/734170f40b8169830d821.jpg", caption=script.PREMIUM_TEXT.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup(btn))
 
 
-
-@Client.on_message(filters.command("del"))
-async def del_id(client, message):
-    user_id = int(message.command[1])
-    await delete_all_referal_users(user_id)
-    await message.reply_text('deleted')
-
-
 async def add_premium(client, userid): 
     user_id = int(userid) 
     time = REFERAL_PREMEIUM_TIME
