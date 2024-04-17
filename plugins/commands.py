@@ -3,6 +3,7 @@ import logging
 import random
 import asyncio
 import pytz
+from plugins.Premium import add_premium
 from Script import script
 from datetime import datetime
 from pyrogram import Client, filters, enums
@@ -165,16 +166,9 @@ async def start(client, message):
             await message.reply(f"<b>You have joined using the referral link of user with ID {user_id}\n\nSend /start again to use the bot</b>")
             num_referrals = await get_referal_users_count(user_id)
             await client.send_message(chat_id = user_id, text = "<b>{} start the bot with your referral link\n\nTotal Referals - {}</b>".format(message.from_user.mention, num_referrals))
-            if num_referrals == REFERAL_COUNT:
-                time = REFERAL_PREMEIUM_TIME       
-                seconds = await get_seconds(time)
-                if seconds > 0:
-                    expiry_time = datetime.datetime.now() + datetime.timedelta(seconds=seconds)
-                    user_data = {"id": user_id, "expiry_time": expiry_time} 
-                    await db.update_user(user_data)  # Use the update_user method to update or insert user data
-                    await delete_all_referal_users(user_id)
-                    await client.send_message(chat_id = user_id, text = "<b>You Have Successfully Completed Total Referal.\n\nYou Added In Premium For {}</b>".format(REFERAL_PREMEIUM_TIME))
-                    return 
+            if num_referrals == int(REFERAL_COUNT):
+                await add_premium(client, user_id)                 
+                return
         
         
     if len(message.command) == 2 and message.command[1] in ["premium"]:
