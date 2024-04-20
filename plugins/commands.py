@@ -161,6 +161,9 @@ async def start(client, message):
     data = message.command[1]
     if data.split("-", 1)[0] == "start":
         user_id = int(data.split("-", 1)[1])
+        if user_id == message.from_user.id:
+          await message.reply("♨️ You cannot refer yourself ♨️")
+          return
         start = await referal_add_user(user_id, message.from_user.id)
         if start:
             await message.reply(f"<b>You have joined using the referral link of user with ID {user_id}\n\nSend /start again to use the bot</b>")
