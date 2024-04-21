@@ -1590,7 +1590,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
     elif query.data == "subscription":
         buttons = [[
             InlineKeyboardButton('Invite', url=f'https://t.me/share/url?url=https://telegram.me/{temp.U_NAME}?start=Deendayal-{query.from_user.id}'),
-            InlineKeyboardButton(f'⏳ {get_referal_users_count(message.from_user.id)}', callback_data='start'),
+            #InlineKeyboardButton(f'⏳ {num_referrals}', callback_data='start'),
             InlineKeyboardButton('⇚Back', callback_data='start')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
@@ -1604,7 +1604,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
-     
         return
 
     elif query.data == "qr_info":
