@@ -164,12 +164,13 @@ async def start(client, message):
         if user_id == message.from_user.id:
           await message.reply("♨️ You cannot refer yourself ♨️")
           return
-        if await db.is_user_exist(message.from_user.id):
+        if await db.find_ref_user(message.from_user.id):
             return await message.reply_text('‼️ Yᴏᴜ ʜᴀᴠᴇ ʙᴇᴇɴ ᴀʟʀᴇᴀᴅʏ ɪɴᴠɪᴛᴇᴅ ᴏʀ ᴊᴏɪɴᴇᴅ')
-           
+            
         start = await referal_add_user(user_id, message.from_user.id)
         if start:
             await message.reply(f"<b>You have joined using the referral link of user with ID {user_id}\n\nSend /start again to use the bot</b>")
+            await db.add_ref_user(message.from_user.id)
             num_referrals = await get_referal_users_count(user_id)
             await client.send_message(chat_id = user_id, text = "<b>{} start the bot with your referral link\n\nTotal Referals - {}</b>".format(message.from_user.mention, num_referrals))
             if num_referrals == int(REFERAL_COUNT):
