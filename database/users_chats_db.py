@@ -44,7 +44,7 @@ class Database:
         self.req = self.db.requests
         self.ref_user = self.db.ref_users
 
-    async def find_refuser(self, id):
+    async def find_ref_user(self, id):
         return bool(await self.ref_user.find_one({'id': id}))
         
     async def add_ref_user(self, id):
