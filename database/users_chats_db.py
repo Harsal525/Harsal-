@@ -42,7 +42,15 @@ class Database:
         self.grp = self.db.groups
         self.users = self.db.uersz
         self.req = self.db.requests
+        self.ref_user = self.db.ref_users
+
+    async def find_refuser(self, id):
+        return bool(await self.ref_user.find_one({'id': id}))
         
+    async def add_ref_user(self, id):
+        await self.ref_user.insert_one({'id': id})
+
+    
     async def find_join_req(self, id):
         return bool(await self.req.find_one({'id': id}))
         
