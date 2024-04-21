@@ -164,6 +164,9 @@ async def start(client, message):
         if user_id == message.from_user.id:
           await message.reply("♨️ You cannot refer yourself ♨️")
           return
+        if await db.is_user_exist(message.from_user.id):
+            return await message.reply_text('‼️ Yᴏᴜ ʜᴀᴠᴇ ʙᴇᴇɴ ᴀʟʀᴇᴀᴅʏ ɪɴᴠɪᴛᴇᴅ ᴏʀ ᴊᴏɪɴᴇᴅ')
+           
         start = await referal_add_user(user_id, message.from_user.id)
         if start:
             await message.reply(f"<b>You have joined using the referral link of user with ID {user_id}\n\nSend /start again to use the bot</b>")
