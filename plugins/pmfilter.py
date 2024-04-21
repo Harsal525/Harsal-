@@ -1589,19 +1589,23 @@ async def cb_handler(client: Client, query: CallbackQuery):
         )
     elif query.data == "subscription":
         buttons = [[
+            InlineKeyboardButton('Invite', url=f'https://t.me/share/url?url=https://telegram.me/{temp.U_NAME}?start=Deendayal-{query.from_user.id}'),
+            InlineKeyboardButton(f'⏳ {get_referal_users_count(message.from_user.id)}', callback_data='start'),
             InlineKeyboardButton('⇚Back', callback_data='start')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await client.edit_message_media(
             query.message.chat.id, 
             query.message.id, 
-            InputMediaPhoto(random.choice(PICS))
+            InputMediaPhoto('https://graph.org/file/43729dd1e563f2595882f.jpg')
         )
         await query.message.edit_text(
-            text=script.SUBSCRIPTION_TXT.format(REFERAL_PREMEIUM_TIME, temp.U_NAME, query.from_user.id, REFERAL_COUNT),
+            text=script.subscription_TXT.format(REFERAL_PREMEIUM_TIME, temp.U_NAME, query.from_user.id, REFERAL_COUNT),
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
+     
+        return
 
     elif query.data == "qr_info":
         buttons = [[
