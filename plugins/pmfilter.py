@@ -1592,7 +1592,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         num_referrals = await get_referal_users_count(user_id)
         buttons = [[
             InlineKeyboardButton('Invite', url=f'https://t.me/share/url?url=https://telegram.me/{temp.U_NAME}?start=Deendayal-{query.from_user.id}'),
-            InlineKeyboardButton(f'⏳ {num_referrals}', callback_data=''),
+           # InlineKeyboardButton(f'⏳ {num_referrals}', callback_data=''),
             InlineKeyboardButton('⇚Back', callback_data='start')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
