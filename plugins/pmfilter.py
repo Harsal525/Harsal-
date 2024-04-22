@@ -1588,8 +1588,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
             parse_mode=enums.ParseMode.HTML
         )
     elif query.data == "subscription":
-        await db.add_ref_user(message.from_user.id)
-        num_referrals = await get_referal_users_count(user_id)
         buttons = [[
             InlineKeyboardButton('Invite', url=f'https://t.me/share/url?url=https://telegram.me/{temp.U_NAME}?start=Deendayal-{query.from_user.id}'),
            # InlineKeyboardButton(f'⏳ {num_referrals}', callback_data=''),
